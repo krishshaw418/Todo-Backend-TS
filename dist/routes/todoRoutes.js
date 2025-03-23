@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_1 = require("../middlewares/auth");
+const todoControllers_1 = require("../controllers/todoControllers");
+const router = (0, express_1.Router)();
+router.post(`/add-todo`, auth_1.verifyToken, todoControllers_1.addTodos);
+router.get(`/`, auth_1.verifyToken, todoControllers_1.getTodos);
+router.delete(`/delete-todo/:id`, auth_1.verifyToken, todoControllers_1.deleteTodos);
+router.put(`/mark-as/:id`, auth_1.verifyToken, todoControllers_1.markAs);
+exports.default = router;
