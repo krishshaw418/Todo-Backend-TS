@@ -20,6 +20,10 @@ const signUpProps = z.object({
     password: z.string().min(5).max(20),
 })
 
+// zod inference for auth
+type SignUpProps = z.infer<typeof signUpProps>;
+type SignInProps = z.infer<typeof signInProps>;
+
 export const signUp = async (req: Request, res: Response): Promise<any> => {
 
     const user = signUpProps.safeParse(req.body);

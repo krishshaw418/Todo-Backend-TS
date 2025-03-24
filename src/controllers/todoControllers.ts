@@ -11,6 +11,11 @@ const updateProps = z.object({
     done: z.boolean(),
 })
 
+// zod inference for todos
+type TodoProps = z.infer<typeof todoProps>;
+type UpdateProps = z.infer<typeof updateProps>;
+
+
 export const addTodos = async(req: Request, res: Response): Promise<any> => {
     const todo = todoProps.safeParse(req.body);
     if(!todo.success){
