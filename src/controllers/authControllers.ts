@@ -76,3 +76,15 @@ export const logout = async(req: Request, res: Response): Promise<any> => {
     res.clearCookie("session_token");
     return res.status(200).json({success: true, message: "Logout Successfull!"});
 }
+
+export const getUserData = async(req: Request, res: Response): Promise<any> => {
+    try {
+        const user = await User.findById(req.userId);
+        if(!user){
+            return res.status(404).json({success: false, message: "User not found!"});
+        }
+        return res.status(200).json({success: true, email: user.email});
+    } catch (error) {
+        
+    }
+}

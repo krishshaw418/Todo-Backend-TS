@@ -37,7 +37,8 @@ export const getTodos = async(req: Request, res: Response): Promise<any> => {
         if(!todos){
             return res.json({success: false, message: "No todos to show yet!"});
         }
-        return res.status(201).json({success: true, data: todos});
+        return res.status(201).json({success: true, data: todos.map(todo => {return {title: todo.title, description: todo.description, done: todo.done}})});
+        // return res.status(201).json({success: true, data: todos});
     } catch (error) {
         console.error(error);
         return res.json({success: false, message: "Can't get todos! Something went wrong."});
